@@ -480,5 +480,291 @@ Plugging it back, we get:
 
 \end_layout
 
+\begin_layout Paragraph*
+Question 3
+\end_layout
+
+\begin_layout Subparagraph*
+(a)
+\end_layout
+
+\begin_layout Standard
+Let G be a graph and 
+\begin_inset Formula $\pi$
+\end_inset
+
+ an elimination order.
+\end_layout
+
+\begin_layout Standard
+Assume by contradiction that the induced graph 
+\begin_inset Formula $G_{\pi}$
+\end_inset
+
+ is not chordal.
+\end_layout
+
+\begin_layout Standard
+Therfore, there must be a cycle of size greater than 3 that does not contain
+ a chord.
+ Let C be such a cycle.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ be the first vertex in C that is being eliminitaed in 
+\begin_inset Formula $\pi$
+\end_inset
+
+, and let 
+\begin_inset Formula $x_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{m}$
+\end_inset
+
+be his adjacenct vertices on C.
+\end_layout
+
+\begin_layout Standard
+When eliminating 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+, we add the edge 
+\begin_inset Formula $(x_{k},x_{m})$
+\end_inset
+
+ to 
+\begin_inset Formula $G_{\pi}$
+\end_inset
+
+.
+ But this is a contradiction to the fact we took C as a cycle of length
+ greater than 3 without a chord.
+ Therefore, 
+\begin_inset Formula $G_{\pi}$
+\end_inset
+
+ is chordal.
+\end_layout
+
+\begin_layout Subparagraph*
+(b)
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $G=(V,E)$
+\end_inset
+
+ a chordal graph.
+\end_layout
+
+\begin_layout Standard
+Following is an algorithm to create an elimination order such that we never
+ add a new edge.
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E'=E$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $V'=V$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $G'=(V',E')$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\pi=[]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+While 
+\begin_inset Formula $V'$
+\end_inset
+
+ is not empty:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Let 
+\series bold
+v
+\series default
+ be a vertex with minimal degree in 
+\begin_inset Formula $G'$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Append v to 
+\begin_inset Formula $\pi$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $V'=V'\setminus\{v\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $E'=E'\setminus\{(v,u)|(v,u)\in E'\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $G'=(V',E')$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We next prove that correctness of the algorithm.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Termination:
+\series default
+ The algorithm terminates, as it runs exactly 
+\begin_inset Formula $|V|$
+\end_inset
+
+ iterations, because we remove one vertex at each iteration and stop when
+ there are none.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Correctness:
+\end_layout
+
+\begin_layout Standard
+We need to show that for every elimination step, we never add a new edge.
+\end_layout
+
+\begin_layout Standard
+Let's look at the degree of the vertex that we remove at some iteration:
+\end_layout
+
+\begin_layout Itemize
+If the degree is 0, we don't add an edge because it has no neighbors.
+\end_layout
+
+\begin_layout Itemize
+If the degree is 1, we don't add an edge because it has one neighbor and
+ the edge already exists.
+\end_layout
+
+\begin_layout Itemize
+If the degree is 2, the vertex has to be part of a cycle, because if it
+ is not a cycle, there is other vertex with degree 1 and it would be chosen.
+\begin_inset Newline newline
+\end_inset
+
+Assume by contradiction that there is no edge between the 2 neighbors.
+ It means that the cycle is of size greater than 3, but we know that the
+ graph is chordal,
+\begin_inset Newline newline
+\end_inset
+
+so if there is no edge between them, there must be a cycle of size greater
+ than 3 without chord, which will be the minimal length cycle that contain
+ the 3 vertices.
+\begin_inset Newline newline
+\end_inset
+
+This is contradiction to G being chrodal.
+ Therefore the edge exists, and we don't add a new edge here.
+\end_layout
+
+\begin_layout Itemize
+If the degree is 3 or more, we can look at the neighbors by couples, one
+ couple at a time, and for each couple, we know by the same analysis that
+ we did for degree=2, that there must be an edge between them.
+\begin_inset Newline newline
+\end_inset
+
+Therefire we don't edge in this case as well.
+\end_layout
+
+\begin_layout Standard
+We covered all options, and thereore, in the elimination order we described,
+ we never add a new edge.
+ Thus 
+\begin_inset Formula $G=G_{\pi}.$
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
