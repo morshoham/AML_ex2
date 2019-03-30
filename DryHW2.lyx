@@ -1,0 +1,484 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Advanced Method in ML - Exercise 2
+\end_layout
+
+\begin_layout Author
+Avia Efrat 300928538
+\begin_inset Newline newline
+\end_inset
+
+Mor Shoham 300953965
+\end_layout
+
+\begin_layout Paragraph*
+Question 2
+\end_layout
+
+\begin_layout Subparagraph*
+(a)
+\end_layout
+
+\begin_layout Standard
+To simplify the notations below, we assume WLOG that i=1 and j=2.
+\end_layout
+
+\begin_layout Standard
+We wish to find 
+\begin_inset Formula $p(x_{1},x_{2})$
+\end_inset
+
+, and show it is same as 
+\begin_inset Formula $\mu_{ij}(x_{1},x_{2})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It is given that 
+\begin_inset Formula $p(x_{1},x_{2},...,x_{n})\propto\underset{a,b\in E}{\prod}\phi_{ab}(x_{a},x_{b})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Therefore, by summing on other variables we get: 
+\begin_inset Formula 
+\[
+p(x_{1},x_{2})=\underset{x_{3},...,x_{n}}{\sum}p(x_{1},x_{2},...,x_{n})\propto\underset{x_{3},...,x_{n}}{\sum}\underset{a,b\in E}{\prod}\phi_{ab}(x_{a},x_{b})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We don't sum on 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+and 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+so we can write:
+\begin_inset Formula 
+\[
+\underset{x_{3},...,x_{n}}{\sum}\underset{a,b\in E}{\prod}\phi_{ab}(x_{a},x_{b})=\phi_{12}(x_{1},x_{2})\underset{x_{3},...,x_{n}}{\sum}\underset{a,b\in E\setminus\{(x_{1},x_{2})\}}{\prod}\phi_{ab}(x_{a},x_{b})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The graph is a tree, so we can devide the variables 
+\begin_inset Formula $x_{3},...,x_{n}$
+\end_inset
+
+ to 2 disjoint sets, 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+, such that 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+are the variables in the subtree of 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ excluding the part in the direction of 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $V_{2}$
+\end_inset
+
+ are the variables in the subtree of 
+\begin_inset Formula $x_{2}$
+\end_inset
+
+ excluding the part in the direction of 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let's also define the sets of edges for each subtree: 
+\begin_inset Formula $E_{1}=\left\{ (x_{a},x_{b})|(x_{a},x_{b})\in E,x_{a},x_{b}\in V_{1}\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $E_{2}=\left\{ (x_{a},x_{b})|(x_{a},x_{b})\in E,x_{a},x_{b}\in V_{2}\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now we can split the sum:
+\begin_inset Formula 
+\[
+\phi_{12}(x_{1},x_{2})\underset{x_{3},...,x_{n}}{\sum}\underset{a,b\in E\setminus\{(x_{1},x_{2})\}}{\prod}\phi_{ab}(x_{a},x_{b})=\phi_{12}(x_{1},x_{2})\underset{V_{1}\setminus\{x_{1}\}}{\sum}\underset{a,b\in E_{1}}{\prod}\phi_{ab}(x_{a},x_{b})\underset{V_{2}\setminus\{x_{2}\}}{\sum}\underset{a,b\in E_{2}}{\prod}\phi_{ab}(x_{a},x_{b})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+And now, because it is a tree, we can also divide 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+ without 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+to disjoint sets, one for each neighbor of 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+ in 
+\begin_inset Formula $V_{1}$
+\end_inset
+
+, marked as 
+\begin_inset Formula $V_{N_{k}}$
+\end_inset
+
+for the neighbor 
+\begin_inset Formula $k$
+\end_inset
+
+, with edges 
+\begin_inset Formula $E_{N_{k}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Thus we can know:
+\begin_inset Formula 
+\[
+\underset{V_{1}\setminus\{x_{1}\}}{\sum}\underset{a,b\in E_{1}}{\prod}\phi_{ab}(x_{a},x_{b})=\underset{k\in N(1)\setminus\{2\}}{\prod}\left[\phi_{k1}(x_{k},x_{1})\underset{V_{N_{k}}}{\sum}\underset{a,b\in E_{N_{k}}}{\prod}\phi_{ab}(x_{a},x_{b})\right]=\underset{k\in N(1)\setminus\{2\}}{\prod}m_{k,1(x_{1})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second equality is also because it is a tree.
+\end_layout
+
+\begin_layout Standard
+Due to symmetry, we get:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\underset{V_{2}\setminus\{x_{2}\}}{\sum}\underset{a,b\in E_{2}}{\prod}\phi_{ab}(x_{a},x_{b})=\underset{k\in N(2)\setminus\{1\}}{\prod}m_{k,2(x_{2})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Plugging back what we learned, we get:
+\begin_inset Formula 
+\[
+p(x_{1},x_{2})\propto\underset{x_{3},...,x_{n}}{\sum}\underset{a,b\in E}{\prod}\phi_{ab}(x_{a},x_{b})=\phi_{12}(x_{1},x_{2})\underset{k\in N(1)\setminus\{2\}}{\prod}m_{k,1(x_{1})}\underset{k\in N(2)\setminus\{1\}}{\prod}m_{k,2(x_{2})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+And this is exactly 
+\begin_inset Formula $\mu_{ij}(x_{1},x_{2})$
+\end_inset
+
+, like we wanted.
+\end_layout
+
+\begin_layout Subparagraph*
+(b)
+\end_layout
+
+\begin_layout Standard
+We start by developing 
+\begin_inset Formula $\underset{x_{j}}{\sum}\mu_{ij}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\underset{x_{j}}{\sum}\mu_{ij}\propto\underset{x_{j}}{\sum}\left[\phi_{ij}(x_{i},x_{j})\underset{k\in N(i)\setminus\{j\}}{\prod}m_{k,i(x_{i})}\underset{k\in N(j)\setminus\{i\}}{\prod}m_{k,j(x_{j})}\right]=
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=\underset{x_{j}}{\sum}\left[\phi_{ij}(x_{i},x_{j})\underset{k\in N(j)\setminus\{i\}}{\prod}m_{k,j(x_{j})}\right]\underset{k\in N(i)\setminus\{j\}}{\prod}m_{k,i(x_{i})}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\underset{x_{j}}{\sum}\left[\phi_{ij}(x_{i},x_{j})\underset{k\in N(j)\setminus\{i\}}{\prod}m_{k,j(x_{j})}\right]$
+\end_inset
+
+ is the message from 
+\begin_inset Formula $j$
+\end_inset
+
+ to 
+\begin_inset Formula $i$
+\end_inset
+
+ that is being updated every round, and if we are at fixed point of LBP,
+ then they are equal.
+\end_layout
+
+\begin_layout Standard
+Plugging it back we get:
+\begin_inset Formula 
+\[
+\underset{x_{j}}{\sum}\mu_{ij}\propto m_{ji}(x_{i})\underset{k\in N(i)\setminus\{j\}}{\prod}m_{k,i(x_{i})}=\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\propto\mu_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+(c)
+\end_layout
+
+\begin_layout Standard
+We start by developing the right side, by the definition of 
+\begin_inset Formula $\mu_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu_{ii}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\underset{i}{\prod}\mu_{i}(x_{i})\underset{i,j\in E}{\prod}\frac{\mu_{ij}(x_{i},x_{j})}{\mu_{i}(x_{i})\mu_{j}(x_{j})}\propto\underset{i}{\prod}\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\underset{i,j\in E}{\prod}\frac{\phi_{ij}(x_{i},x_{j})\underset{k\in N(i)\setminus\{j\}}{\prod}m_{k,i(x_{i})}\underset{k\in N(j)\setminus\{i\}}{\prod}m_{k,j(x_{j})}}{\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\underset{k\in N(j)}{\prod}m_{k,j(x_{j})}}=
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+=\underset{i}{\prod}\left[\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\right]\underset{i,j\in E}{\prod}\left[\frac{\phi_{ij}(x_{i},x_{j})\underset{k\in N(i)\setminus\{j\}}{\prod}m_{k,i(x_{i})}\underset{k\in N(j)\setminus\{i\}}{\prod}m_{k,j(x_{j})}}{m_{j,i}(x_{i})m_{i,j}(x_{j})\underset{k\in N(i)\setminus\{j\}}{\prod}m_{k,i(x_{i})}\underset{k\in N(j)\setminus\{i\}}{\prod}m_{k,j(x_{j})}}\right]=
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+=\underset{i}{\prod}\left[\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\right]\underset{i,j\in E}{\prod}\left[\frac{\phi_{ij}(x_{i},x_{j})}{m_{j,i}(x_{i})m_{i,j}(x_{j})}\right]=
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{equation}
+=\underset{i,j\in E}{\prod}\left[\phi_{ij}(x_{i},x_{j})\right]\underset{i}{\prod}\left[\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\right]\underset{i,j\in E}{\prod}\left[\frac{1}{m_{j,i}(x_{i})m_{i,j}(x_{j})}\right]=
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+=\underset{i,j\in E}{\prod}\left[\phi_{ij}(x_{i},x_{j})\right]\left[\frac{\underset{i}{\prod}\left[\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\right]}{\underset{i,j\in E}{\prod}m_{j,i}(x_{i})m_{i,j}(x_{j})}\right]
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The move from (1) to (2) is extracting one element from each product in
+ the denominator in order to get identical terms in the denominator and
+ nominator, which we remove at (3).
+\end_layout
+
+\begin_layout Standard
+The move from (3) to (4) and (4) to (5) is re organization of the products.
+\end_layout
+
+\begin_layout Standard
+At (5), we have the term 
+\begin_inset Formula $\frac{\underset{i}{\prod}\left[\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\right]}{\underset{i,j\in E}{\prod}m_{j,i}(x_{i})m_{i,j}(x_{j})}$
+\end_inset
+
+.
+ In the denominator we go over all edges and multiply the messages in both
+ direction.
+\end_layout
+
+\begin_layout Standard
+In the nominator we go over each edge twice, one from each vertex of it,
+ and add the message to the overall product.
+\end_layout
+
+\begin_layout Standard
+Both achieve the same result, and therefore:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\underset{i}{\prod}\left[\underset{k\in N(i)}{\prod}m_{k,i(x_{i})}\right]}{\underset{i,j\in E}{\prod}m_{j,i}(x_{i})m_{i,j}(x_{j})}=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Plugging it back, we get:
+\begin_inset Formula 
+\[
+\underset{i}{\prod}\mu_{i}(x_{i})\underset{i,j\in E}{\prod}\frac{\mu_{ij}(x_{i},x_{j})}{\mu_{i}(x_{i})\mu_{j}(x_{j})}\propto\underset{i,j\in E}{\prod}\left[\phi_{ij}(x_{i},x_{j})\right]\propto p(x_{1},x_{2},...,x_{n})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
